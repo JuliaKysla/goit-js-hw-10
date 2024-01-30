@@ -8,7 +8,6 @@ import 'izitoast/dist/css/iziToast.min.css';
 const textInput = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('button[data-start]');
 
-let userSelectedDate;
 startBtn.disabled = true;
 
 const options = {
@@ -20,9 +19,12 @@ const options = {
   onClose(selectedDates) {
     timer.initTime = selectedDates[0].getTime();
     if (timer.initTime <= Date.now()) {
-      iziToast.show({
+      iziToast.error({
+        title: 'Error',
         message: 'Please choose a date in the future',
-      });
+        position: 'topRight',
+    });
+
     } else {
       startBtn.disabled = false;
     }
